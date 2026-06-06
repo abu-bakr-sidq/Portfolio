@@ -22,7 +22,6 @@ const certificateOpenButton = document.querySelector("[data-certificate-open]");
 const certificateCloseButton = document.querySelector("[data-certificate-close]");
 const certificatePanel = document.querySelector("[data-certificate-panel]");
 const faqRows = [...document.querySelectorAll("[data-faq-row]")];
-const projectVideos = [...document.querySelectorAll("video")];
 
 const state = {
   step: 0,
@@ -479,24 +478,3 @@ function scheduleScrollUpdate() {
 
 window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
 scrollContainer?.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
-
-if ("IntersectionObserver" in window && projectVideos.length) {
-  const videoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target;
-
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    },
-    { root: scrollContainer || null, threshold: 0.35 },
-  );
-
-  projectVideos.forEach((video) => {
-    videoObserver.observe(video);
-  });
-}
