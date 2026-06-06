@@ -238,7 +238,7 @@ img {
 video {
   transform: translateZ(0);
   backface-visibility: hidden;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 @media (max-width: 767px) {
