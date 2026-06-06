@@ -22,14 +22,12 @@ const certificateOpenButton = document.querySelector("[data-certificate-open]");
 const certificateCloseButton = document.querySelector("[data-certificate-close]");
 const certificatePanel = document.querySelector("[data-certificate-panel]");
 const faqRows = [...document.querySelectorAll("[data-faq-row]")];
-const projectVideos = [...document.querySelectorAll("[data-project-video]")];
 
 const state = {
   step: 0,
   ticking: false,
   counterObserver: null,
   aboutCounterObserver: null,
-  projectVideoObserver: null,
 };
 
 const basePanelClasses = [
@@ -331,55 +329,6 @@ function setupAboutCounterObserver() {
   state.aboutCounterObserver.observe(aboutSection);
 }
 
-function setupProjectVideoObserver() {
-  state.projectVideoObserver?.disconnect();
-
-  if (!("IntersectionObserver" in window) || projectVideos.length === 0) {
-    projectVideos.forEach((video) => {
-      video.play().catch(() => {});
-    });
-    return;
-  }
-
-  state.projectVideoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target.querySelector("[data-project-video]");
-
-        if (!video) {
-          return;
-        }
-
-        if (entry.isIntersecting) {
-          if (video.dataset.activePlayback !== "true") {
-            video.dataset.activePlayback = "true";
-            video.currentTime = 0;
-          }
-
-          video.play().catch(() => {});
-          return;
-        }
-
-        video.pause();
-        video.currentTime = 0;
-        video.dataset.activePlayback = "false";
-      });
-    },
-    {
-      root: desktopSnap.matches ? scrollContainer : null,
-      threshold: 0.5,
-    },
-  );
-
-  projectVideos.forEach((video) => {
-    const section = video.closest("section");
-
-    if (section) {
-      state.projectVideoObserver.observe(section);
-    }
-  });
-}
-
 function openCertificateModal() {
   if (!certificateModal) {
     return;
@@ -425,7 +374,6 @@ updateStory();
 updateActiveNav();
 setupCounterObserver();
 setupAboutCounterObserver();
-setupProjectVideoObserver();
 
 certificateOpenButton?.addEventListener("click", openCertificateModal);
 certificateCloseButton?.addEventListener("click", closeCertificateModal);
@@ -513,7 +461,6 @@ window.addEventListener("resize", () => {
   updateActiveNav();
   setupCounterObserver();
   setupAboutCounterObserver();
-  setupProjectVideoObserver();
 });
 
 function scheduleScrollUpdate() {
