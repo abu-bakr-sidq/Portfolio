@@ -550,6 +550,58 @@
       color: #0a66c2;
     }
 
+    .mobile-menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      place-items: center;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      transition:
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      transform: translateY(-1px);
+      border-color: rgba(148, 163, 184, 0.55);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+    }
+
+    .mobile-menu-toggle-lines {
+      display: grid;
+      gap: 5px;
+      width: 18px;
+    }
+
+    .mobile-menu-toggle-lines span {
+      display: block;
+      height: 2px;
+      border-radius: 999px;
+      background: #020617;
+      transform-origin: center;
+      transition:
+        opacity 220ms ease,
+        transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobile-menu-toggle.is-open .mobile-menu-toggle-lines span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-menu-toggle.is-open .mobile-menu-toggle-lines span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.25);
+    }
+
+    .mobile-menu-toggle.is-open .mobile-menu-toggle-lines span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     .nav-contact-link.is-active {
       color: #020617;
     }
@@ -622,6 +674,147 @@
       }
     }
 
+    @media (max-width: 767px) {
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      .site-header {
+        height: auto;
+        min-height: 72px;
+        padding: 10px 16px;
+        align-items: center;
+      }
+
+      .nav-shell {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 12px;
+      }
+
+      .brand-zone {
+        width: auto;
+        justify-content: flex-start;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+      }
+
+      .mobile-menu-toggle {
+        display: grid;
+      }
+
+      .site-nav {
+        display: grid;
+        width: 100%;
+        max-height: 0;
+        margin-top: 0;
+        overflow: hidden;
+        gap: 2px;
+        padding: 0 10px;
+        border: 1px solid rgba(226, 232, 240, 0);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+          margin-top 260ms ease,
+          padding 260ms ease,
+          border-color 260ms ease,
+          box-shadow 260ms ease,
+          opacity 220ms ease;
+      }
+
+      .site-nav.is-open {
+        max-height: 390px;
+        margin-top: 8px;
+        padding: 10px;
+        border-color: rgba(226, 232, 240, 0.85);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-link {
+        min-height: 44px;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0 14px;
+        border-radius: 16px;
+        font-size: 0.9rem;
+        transition:
+          color 180ms ease,
+          background 180ms ease,
+          transform 180ms ease;
+      }
+
+      .nav-link:hover,
+      .nav-link.is-active {
+        background: rgba(248, 250, 252, 0.95);
+      }
+
+      .nav-link::after {
+        bottom: 9px;
+        left: 14px;
+        transform: scaleX(0.35);
+        transform-origin: left;
+      }
+
+      .nav-link.is-active::after {
+        transform: scaleX(1);
+      }
+
+      section {
+        scroll-margin-top: 96px;
+      }
+
+      #home {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 100vh;
+        justify-content: flex-start !important;
+        overflow: visible !important;
+        padding: 96px 16px 48px !important;
+      }
+
+      #home h1 {
+        font-size: clamp(2.35rem, 12vw, 3.15rem);
+        line-height: 0.98;
+      }
+
+      #home .font-mono {
+        min-height: 240px;
+        padding: 16px;
+        font-size: 0.72rem;
+      }
+
+      #home pre {
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 1.65;
+      }
+
+      #projects,
+      #mytank,
+      #experience,
+      #faq,
+      #contact {
+        overflow: visible !important;
+        padding-top: 104px !important;
+        padding-bottom: 48px !important;
+      }
+
+      video {
+        max-height: 260px;
+      }
+    }
+
     @media (min-width: 901px) and (max-width: 1180px) {
       .site-header {
         padding-right: 32px;
@@ -682,13 +875,22 @@
           </svg>
         </a>
       </div>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#home" class="nav-link is-active" data-nav-link data-scroll-link aria-current="page">Home</a>
-        <a href="#about" class="nav-link" data-nav-link data-scroll-link>About</a>
-        <a href="#projects" class="nav-link" data-nav-link data-scroll-link>Projects</a>
-        <a href="#experience" class="nav-link" data-nav-link data-scroll-link>Experience</a>
-        <a href="#pricing" class="nav-link" data-nav-link data-scroll-link>Pricing</a>
-        <a href="#faq" class="nav-link" data-nav-link data-scroll-link>FAQ</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"
+        aria-controls="mobile-menu" data-mobile-menu-toggle>
+        <span class="mobile-menu-toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <nav class="site-nav" id="mobile-menu" aria-label="Primary navigation" data-mobile-menu>
+        <a href="#home" class="nav-link is-active" data-nav-link data-scroll-link data-mobile-menu-link
+          aria-current="page">Home</a>
+        <a href="#about" class="nav-link" data-nav-link data-scroll-link data-mobile-menu-link>About</a>
+        <a href="#projects" class="nav-link" data-nav-link data-scroll-link data-mobile-menu-link>Projects</a>
+        <a href="#experience" class="nav-link" data-nav-link data-scroll-link data-mobile-menu-link>Experience</a>
+        <a href="#pricing" class="nav-link" data-nav-link data-scroll-link data-mobile-menu-link>Pricing</a>
+        <a href="#faq" class="nav-link" data-nav-link data-scroll-link data-mobile-menu-link>FAQ</a>
       </nav>
       <div class="nav-actions">
         <a href="#contact" class="nav-contact-link" data-nav-link data-scroll-link>Contact Us</a>
@@ -699,7 +901,7 @@
   <main
     class="snap-container h-auto w-full overflow-y-visible scroll-smooth md:h-screen md:overflow-y-scroll md:snap-y md:snap-mandatory md:scroll-pt-24">
     <section id="home"
-      class="story-stage flex h-screen max-h-screen w-full snap-start flex-col justify-center overflow-hidden bg-white px-12 pb-8 pt-32">
+      class="story-stage flex h-screen max-h-screen w-full snap-start flex-col justify-center overflow-hidden bg-white px-12 pb-8 pt-32 max-md:h-auto max-md:max-h-none max-md:overflow-visible max-md:px-4 max-md:pb-12 max-md:pt-24">
       <div class="mx-auto grid w-full max-w-7xl grid-cols-1 items-stretch gap-8 md:grid-cols-12">
         <div class="flex h-full flex-col justify-center gap-8 pt-8 md:col-span-7 md:self-stretch">
           <div class="space-y-5">
@@ -720,7 +922,7 @@
             </div>
           </div>
 
-          <div class="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-4">
+          <div class="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-4 max-md:p-4 max-md:pb-4">
             <span class="liquid-glass-layer liquid-glass-center" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-bottom" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-stroke" aria-hidden="true"></span>
@@ -733,7 +935,7 @@
               </h2>
               <div class="flex flex-wrap items-center justify-center gap-4">
                 <div
-                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50">
+                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:min-w-0 max-md:w-[calc(50%-0.5rem)] max-md:px-3">
                   <span class="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950/95">
                     <img class="h-9 w-9"
                       src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
@@ -742,7 +944,7 @@
                   <span class="text-xs font-medium text-slate-600">React</span>
                 </div>
                 <div
-                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50">
+                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:min-w-0 max-md:w-[calc(50%-0.5rem)] max-md:px-3">
                   <span class="grid h-12 w-12 place-items-center rounded-2xl bg-white ring-1 ring-slate-900/10">
                     <img class="h-9 w-9"
                       src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
@@ -751,7 +953,7 @@
                   <span class="text-xs font-medium text-slate-600">Next.js</span>
                 </div>
                 <div
-                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50">
+                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:min-w-0 max-md:w-[calc(50%-0.5rem)] max-md:px-3">
                   <span class="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50">
                     <img class="h-9 w-9"
                       src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
@@ -760,7 +962,7 @@
                   <span class="text-xs font-medium text-slate-600">MongoDB</span>
                 </div>
                 <div
-                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50">
+                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:min-w-0 max-md:w-[calc(50%-0.5rem)] max-md:px-3">
                   <span class="grid h-12 w-12 place-items-center rounded-2xl bg-sky-50">
                     <img class="h-9 w-9"
                       src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
@@ -769,7 +971,7 @@
                   <span class="text-xs font-medium text-slate-600">Tailwind</span>
                 </div>
                 <div
-                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50">
+                  class="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:min-w-0 max-md:w-[calc(50%-0.5rem)] max-md:px-3">
                   <span class="grid h-12 w-12 place-items-center rounded-2xl bg-lime-50">
                     <img class="h-9 w-9"
                       src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
@@ -783,7 +985,7 @@
         </div>
 
         <div class="md:col-span-5 md:flex md:h-full md:self-stretch">
-          <div class="liquid-glass-card h-full rounded-3xl p-6">
+          <div class="liquid-glass-card h-full rounded-3xl p-6 max-md:h-auto max-md:p-4">
             <span class="liquid-glass-layer liquid-glass-center" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-bottom" aria-hidden="true"></span>
             <span class="liquid-glass-layer liquid-glass-stroke" aria-hidden="true"></span>

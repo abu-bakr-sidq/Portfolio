@@ -41,7 +41,7 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="flex h-screen max-h-screen w-full snap-start flex-col justify-center overflow-hidden bg-white px-12 pb-8 pt-32"
+      className="flex h-screen max-h-screen w-full snap-start flex-col justify-center overflow-hidden bg-white px-12 pb-8 pt-32 max-md:h-auto max-md:max-h-none max-md:overflow-visible max-md:px-4 max-md:pb-12 max-md:pt-24"
     >
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-stretch gap-8 md:grid-cols-12">
         <div className="flex h-full flex-col justify-center gap-8 pt-8 md:col-span-7 md:self-stretch">
@@ -68,7 +68,7 @@ function HeroSection() {
             </div>
           </div>
 
-          <div className="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-4">
+          <div className="liquid-glass-card overflow-hidden rounded-3xl p-6 pb-4 max-md:p-4 max-md:pb-4">
             <span className="liquid-glass-layer liquid-glass-center" aria-hidden="true" />
             <span className="liquid-glass-layer liquid-glass-bottom" aria-hidden="true" />
             <span className="liquid-glass-layer liquid-glass-stroke" aria-hidden="true" />
@@ -81,7 +81,7 @@ function HeroSection() {
                 {techStack.map((skill) => (
                   <div
                     key={skill.name}
-                    className="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50"
+                    className="flex min-w-[112px] flex-col items-center gap-2 rounded-[22px] border border-slate-200/60 bg-white/90 px-4 py-4 text-center shadow-sm shadow-slate-100/50 max-md:w-[calc(50%-0.5rem)] max-md:min-w-0 max-md:px-3"
                   >
                     <span
                       className={`grid h-12 w-12 place-items-center rounded-2xl ${skill.frameClass}`}
@@ -103,7 +103,7 @@ function HeroSection() {
         </div>
 
         <div className="md:flex md:h-full md:col-span-5 md:self-stretch">
-          <div className="liquid-glass-card h-full rounded-3xl p-6">
+          <div className="liquid-glass-card h-full rounded-3xl p-6 max-md:h-auto max-md:p-4">
             <span className="liquid-glass-layer liquid-glass-center" aria-hidden="true" />
             <span className="liquid-glass-layer liquid-glass-bottom" aria-hidden="true" />
             <span className="liquid-glass-layer liquid-glass-stroke" aria-hidden="true" />

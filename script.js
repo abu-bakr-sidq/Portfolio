@@ -6,6 +6,8 @@ const techChips = [...document.querySelectorAll("[data-tech-step]")];
 const siteHeader = document.querySelector(".site-header");
 const navLinks = [...document.querySelectorAll("[data-nav-link]")];
 const scrollLinks = [...document.querySelectorAll("[data-scroll-link]")];
+const mobileMenuToggle = document.querySelector("[data-mobile-menu-toggle]");
+const mobileMenu = document.querySelector("[data-mobile-menu]");
 const navSections = navLinks
   .map((link) => document.querySelector(link.hash))
   .filter(Boolean);
@@ -119,6 +121,21 @@ function setActiveNav(sectionId) {
       link.removeAttribute("aria-current");
     }
   });
+}
+
+function setMobileMenu(open) {
+  if (!mobileMenuToggle || !mobileMenu) {
+    return;
+  }
+
+  mobileMenuToggle.classList.toggle("is-open", open);
+  mobileMenu.classList.toggle("is-open", open);
+  mobileMenuToggle.setAttribute("aria-expanded", String(open));
+  mobileMenuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+}
+
+function closeMobileMenu() {
+  setMobileMenu(false);
 }
 
 function updateActiveNav() {
@@ -366,9 +383,24 @@ certificatePanel?.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
+mobileMenuToggle?.addEventListener("click", () => {
+  const isOpen = mobileMenuToggle.getAttribute("aria-expanded") === "true";
+  setMobileMenu(!isOpen);
+});
+
+document.addEventListener("click", (event) => {
+  if (!siteHeader?.contains(event.target)) {
+    closeMobileMenu();
+  }
+});
+
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && certificateModal && !certificateModal.classList.contains("hidden")) {
     closeCertificateModal();
+  }
+
+  if (event.key === "Escape") {
+    closeMobileMenu();
   }
 });
 
@@ -415,12 +447,17 @@ scrollLinks.forEach((link) => {
 
     event.preventDefault();
     setActiveNav(target.id);
+    closeMobileMenu();
     scrollToSection(target);
     window.history.pushState(null, "", link.hash);
   });
 });
 
 window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768) {
+    closeMobileMenu();
+  }
+
   updateStory();
   updateActiveNav();
   setupCounterObserver();
