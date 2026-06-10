@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abubacker Siddiq J | Portfolio</title>
   <link rel="icon" type="image/png" href="/assets/images/logo.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/styles/tailwind.css" />
   <style>
     @keyframes scrollGlowWave {
 
@@ -823,35 +823,6 @@
       }
     }
   </style>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Segoe UI', 'sans-serif'],
-            display: ['Sora', 'Inter', 'sans-serif'],
-          },
-          keyframes: {
-            hintPulse: {
-              '0%, 100%': {
-                boxShadow:
-                  '0 0 0 1px rgba(255,255,255,.4), 0 0 18px rgba(255,255,255,.82), 0 8px 24px rgba(166,182,209,.22)',
-                transform: 'translateY(0)',
-              },
-              '50%': {
-                boxShadow:
-                  '0 0 0 1px rgba(255,255,255,.5), 0 0 28px rgba(255,255,255,1), 0 10px 28px rgba(166,182,209,.3)',
-                transform: 'translateY(-2px)',
-              },
-            },
-          },
-          animation: {
-            'hint-pulse': 'hintPulse 2.4s ease-in-out infinite',
-          },
-        },
-      },
-    }
-  </script>
 </head>
 
 <body
@@ -1300,7 +1271,7 @@
                 <div class="overflow-hidden rounded-2xl bg-slate-950">
                   <video class="h-auto w-full rounded-xl object-contain" autoplay loop muted playsinline preload="auto"
                     aria-label="Affhan Sourcing project looping preview">
-                    <source src="/assets/videos/affhan.mp4" type="video/mp4" />
+                    <source src="https://affhan-globalsourcing.onrender.com/videos/logistics.mp4" type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -1740,5 +1711,3 @@
 </body>
 
 </html>
-
-
